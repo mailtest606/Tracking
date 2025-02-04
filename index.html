@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Apps Script Tracking</title>
+    <style>
+        /* iframe을 Google Apps Script 웹앱 경고 배너 없이 표시 */
+        #container {
+            width: 100%;
+            height: 500px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        #trackingFrame {
+            width: 100%;
+            height: 550px;
+            position: absolute;
+            top: -50px; /* 경고 배너 숨기기 */
+            left: 0;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Google Apps Script Tracking Page</h1>
+
+    <div id="container">
+        <iframe id="trackingFrame"
+            src="https://script.google.com/macros/s/AKfycbxvw0rfxo72y2ROdUNFUzNbViQigVwIlsseuBsna6fXFxh9Wnj0QxmuIUKZLKCDOetB/exec">
+        </iframe>
+    </div>
+
+</body>
+</html>
