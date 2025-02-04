@@ -4,33 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Apps Script Tracking</title>
-    <style>
-        /* iframe을 Google Apps Script 웹앱 경고 배너 없이 표시 */
-        #container {
-            width: 100%;
-            height: 500px;
-            overflow: hidden;
-            position: relative;
+    <script>
+        // URL에서 email 파라미터 가져오기
+        function getQueryParam(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
         }
 
-        #trackingFrame {
-            width: 100%;
-            height: 550px;
-            position: absolute;
-            top: -50px; /* 경고 배너 숨기기 */
-            left: 0;
-            border: none;
-        }
-    </style>
+        // Google Form으로 리다이렉트 (트래킹 포함)
+        window.onload = function() {
+            const email = getQueryParam("email");
+            if (email) {
+                const trackingUrl = `https://script.google.com/macros/s/AKfycbwliKll78KFOGZJFNSQ-IHUcWhOI6bdej0l2VIFFHWXeSYBJF42FCXwveWAjmPxfU6FcA/exec?email=${encodeURIComponent(email)}`;
+                
+                // Google Apps Script 호출 (트래킹)
+                fetch(trackingUrl).then(() => {
+                    // Google Form으로 이동
+                    window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLSf15Mxdfrx07Ghr67_Bcwuet9DwHDgWnmYQF6YdHcRHxRGvYQ/viewform";
+                });
+            } else {
+                document.body.innerHTML = "<h2>잘못된 접근입니다.</h2>";
+            }
+        };
+    </script>
 </head>
 <body>
-    <h1>Google Apps Script Tracking Page</h1>
-
-    <div id="container">
-        <iframe id="trackingFrame"
-            src="https://script.google.com/macros/s/AKfycbxvw0rfxo72y2ROdUNFUzNbViQigVwIlsseuBsna6fXFxh9Wnj0QxmuIUKZLKCDOetB/exec">
-        </iframe>
-    </div>
-
+    <h2>잠시만 기다려 주세요... ⏳</h2>
 </body>
 </html>
